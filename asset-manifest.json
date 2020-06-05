@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/react-element-typescript-admin/static/css/main.4be420e9.chunk.css",
-    "main.js": "/react-element-typescript-admin/static/js/main.d3054b5e.chunk.js",
-    "main.js.map": "/react-element-typescript-admin/static/js/main.d3054b5e.chunk.js.map",
+    "main.js": "/react-element-typescript-admin/static/js/main.3598d35f.chunk.js",
+    "main.js.map": "/react-element-typescript-admin/static/js/main.3598d35f.chunk.js.map",
     "runtime-main.js": "/react-element-typescript-admin/static/js/runtime-main.9bf40a23.js",
     "runtime-main.js.map": "/react-element-typescript-admin/static/js/runtime-main.9bf40a23.js.map",
     "static/css/2.2e801413.chunk.css": "/react-element-typescript-admin/static/css/2.2e801413.chunk.css",
     "static/js/2.889227e3.chunk.js": "/react-element-typescript-admin/static/js/2.889227e3.chunk.js",
     "static/js/2.889227e3.chunk.js.map": "/react-element-typescript-admin/static/js/2.889227e3.chunk.js.map",
     "index.html": "/react-element-typescript-admin/index.html",
-    "precache-manifest.d8060faca2c869174b9b2dca8485c83c.js": "/react-element-typescript-admin/precache-manifest.d8060faca2c869174b9b2dca8485c83c.js",
+    "precache-manifest.5e5b4a104639e0458b855eab4620cde3.js": "/react-element-typescript-admin/precache-manifest.5e5b4a104639e0458b855eab4620cde3.js",
     "service-worker.js": "/react-element-typescript-admin/service-worker.js",
     "static/css/2.2e801413.chunk.css.map": "/react-element-typescript-admin/static/css/2.2e801413.chunk.css.map",
     "static/css/main.4be420e9.chunk.css.map": "/react-element-typescript-admin/static/css/main.4be420e9.chunk.css.map",
@@ -22,6 +22,6 @@
     "static/css/2.2e801413.chunk.css",
     "static/js/2.889227e3.chunk.js",
     "static/css/main.4be420e9.chunk.css",
-    "static/js/main.d3054b5e.chunk.js"
+    "static/js/main.3598d35f.chunk.js"
   ]
 }
