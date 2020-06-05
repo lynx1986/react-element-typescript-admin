@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "./static/css/main.b688f434.chunk.css",
-    "main.js": "./static/js/main.00e9036a.chunk.js",
-    "main.js.map": "./static/js/main.00e9036a.chunk.js.map",
-    "runtime-main.js": "./static/js/runtime-main.f4d23b24.js",
-    "runtime-main.js.map": "./static/js/runtime-main.f4d23b24.js.map",
-    "static/css/2.a77f9b8c.chunk.css": "./static/css/2.a77f9b8c.chunk.css",
-    "static/js/2.4b8dfa74.chunk.js": "./static/js/2.4b8dfa74.chunk.js",
-    "static/js/2.4b8dfa74.chunk.js.map": "./static/js/2.4b8dfa74.chunk.js.map",
-    "index.html": "./index.html",
-    "precache-manifest.d18b7a2e1a0313da1ad1165584737f82.js": "./precache-manifest.d18b7a2e1a0313da1ad1165584737f82.js",
-    "service-worker.js": "./service-worker.js",
-    "static/css/2.a77f9b8c.chunk.css.map": "./static/css/2.a77f9b8c.chunk.css.map",
-    "static/css/main.b688f434.chunk.css.map": "./static/css/main.b688f434.chunk.css.map",
-    "static/js/2.4b8dfa74.chunk.js.LICENSE.txt": "./static/js/2.4b8dfa74.chunk.js.LICENSE.txt",
-    "static/media/index.css": "./static/media/element-icons.d2f69a92.woff",
-    "static/media/iconfont.css": "./static/media/iconfont.e08cc87d.eot"
+    "main.css": "/react-element-typescript-admin/static/css/main.4be420e9.chunk.css",
+    "main.js": "/react-element-typescript-admin/static/js/main.d3054b5e.chunk.js",
+    "main.js.map": "/react-element-typescript-admin/static/js/main.d3054b5e.chunk.js.map",
+    "runtime-main.js": "/react-element-typescript-admin/static/js/runtime-main.9bf40a23.js",
+    "runtime-main.js.map": "/react-element-typescript-admin/static/js/runtime-main.9bf40a23.js.map",
+    "static/css/2.2e801413.chunk.css": "/react-element-typescript-admin/static/css/2.2e801413.chunk.css",
+    "static/js/2.889227e3.chunk.js": "/react-element-typescript-admin/static/js/2.889227e3.chunk.js",
+    "static/js/2.889227e3.chunk.js.map": "/react-element-typescript-admin/static/js/2.889227e3.chunk.js.map",
+    "index.html": "/react-element-typescript-admin/index.html",
+    "precache-manifest.d8060faca2c869174b9b2dca8485c83c.js": "/react-element-typescript-admin/precache-manifest.d8060faca2c869174b9b2dca8485c83c.js",
+    "service-worker.js": "/react-element-typescript-admin/service-worker.js",
+    "static/css/2.2e801413.chunk.css.map": "/react-element-typescript-admin/static/css/2.2e801413.chunk.css.map",
+    "static/css/main.4be420e9.chunk.css.map": "/react-element-typescript-admin/static/css/main.4be420e9.chunk.css.map",
+    "static/js/2.889227e3.chunk.js.LICENSE.txt": "/react-element-typescript-admin/static/js/2.889227e3.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/react-element-typescript-admin/static/media/element-icons.d2f69a92.woff",
+    "static/media/iconfont.css": "/react-element-typescript-admin/static/media/iconfont.e08cc87d.eot"
   },
   "entrypoints": [
-    "static/js/runtime-main.f4d23b24.js",
-    "static/css/2.a77f9b8c.chunk.css",
-    "static/js/2.4b8dfa74.chunk.js",
-    "static/css/main.b688f434.chunk.css",
-    "static/js/main.00e9036a.chunk.js"
+    "static/js/runtime-main.9bf40a23.js",
+    "static/css/2.2e801413.chunk.css",
+    "static/js/2.889227e3.chunk.js",
+    "static/css/main.4be420e9.chunk.css",
+    "static/js/main.d3054b5e.chunk.js"
   ]
 }
