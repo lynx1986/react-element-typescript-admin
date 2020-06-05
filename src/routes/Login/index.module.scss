@@ -1,0 +1,17 @@
+
+.loginPage {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 200px;
+    background-color: #2d3a4b;
+
+    .loginForm {
+        width: 400px;
+
+        .loginButton {
+            width: 100%;
+        }
+    }
+}

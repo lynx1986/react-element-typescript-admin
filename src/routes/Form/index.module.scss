@@ -1,0 +1,19 @@
+
+.datePicker {
+    width: 100%;
+    &>div {
+        width: 100% !important;
+    }
+}
+
+.timePicker {
+    width: 100%;
+    &>div {
+        width: 100% !important;
+    }
+}
+
+.separator {
+    display: block;
+    text-align: center;
+}
