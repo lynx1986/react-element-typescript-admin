@@ -14,21 +14,26 @@ export interface TagViewProps extends RouteComponentProps, WithTranslation {
     app?: AppState
 }
 
-function findRoute(routes: RouteItem[], pathname: string, basePath=''): RouteItem | undefined {
+function findRoute(routes: RouteItem[], pathname: string): RouteItem | undefined {
 
     if (routes.length === 0) return undefined;
     
-    const route = routes.find(r => pathname.startsWith(basePath + r.path));
-    if (!route) return undefined;
+    const matchedRoutes = routes.filter(r => pathname.startsWith(r.fullPath!));
+    if (matchedRoutes.length === 0) return undefined;
+    let route = matchedRoutes[0] ;
+    matchedRoutes.forEach(r => {
+        if (r.fullPath!.length > route.fullPath!.length) {
+            route = r;
+        }
+    });
 
-    console.log(basePath + route.path, pathname);
-    if (basePath + route.path === pathname) {
-        route.fullPath = basePath + route.path;
+    console.log(route.fullPath, pathname, route);
+    if (route.fullPath === pathname) {
         return route;
     }
 
     if (!route.children) return undefined;
-    return findRoute(route.children, pathname, basePath + route.path);
+    return findRoute(route.children, pathname);
 }
 
 function filterAffixRoutes(routes: RouteItem[], basePath=''): RouteItem[] {
@@ -37,7 +42,6 @@ function filterAffixRoutes(routes: RouteItem[], basePath=''): RouteItem[] {
     routes.map(route => {
 
         if (route.meta && route.meta.affix) {
-            route.fullPath = basePath + route.path;
             affixRoutes.push(route);
         }
 

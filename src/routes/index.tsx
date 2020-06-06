@@ -112,7 +112,7 @@ const dynamicRoutes: RouteItem[] = [
     meta: { icon: 'box-plot' },
     children: [
       {
-        path: '/index', name: 'dynamicIndex', component: Dynamic,
+        path: '', name: 'dynamicIndex', component: Dynamic,
         meta: { icon: 'box-plot' }
       },
       {
@@ -154,9 +154,12 @@ function sortRoutes(routes: RouteItem[], roles: string[]): { blankRoutes: RouteI
   return { blankRoutes, basicRoutes };
 }
 
-function filterRouteByRoles(route: RouteItem, roles: string[]): RouteItem | null {
+function filterRouteByRoles(route: RouteItem, roles: string[], basePath=''): RouteItem | null {
 
-  if (!roles || roles.length === 0) return route;
+  // if (!roles || roles.length === 0) {
+  //   route.fullPath = basePath + route.path;
+  //   return route;
+  // }
 
   if (route.meta && route.meta.roles) {
     if (!route.meta.roles.find(role => roles.indexOf(role) >= 0)) {
@@ -164,12 +167,12 @@ function filterRouteByRoles(route: RouteItem, roles: string[]): RouteItem | null
     }
   }
 
-  const filteredRoute = Object.assign({}, route);
+  const filteredRoute = Object.assign({ fullPath: basePath + route.path }, route);
   
   if (filteredRoute.children) {
     const cRoutes: RouteItem[] = [];
     filteredRoute.children.forEach(cRoute => {
-      const authorizedRoute = filterRouteByRoles(cRoute, roles);
+      const authorizedRoute = filterRouteByRoles(cRoute, roles, filteredRoute.fullPath);
       if (authorizedRoute) {
         cRoutes.push(authorizedRoute);
       }
@@ -201,6 +204,7 @@ class AppRoute extends React.Component<AppRouteProps, AppRouteState> {
   render() {
 
     const { blankRoutes, basicRoutes } = this.state;
+    console.log(basicRoutes, blankRoutes);
 
     return (
       <BrowserRouter>
