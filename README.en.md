@@ -1,36 +1,45 @@
-# react-element-typescript-admin
+## Overview
+react-element-typescript-admin is based on the newest development stack of react and it's a react version for the awesome vue-based admin interfaces [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin).
 
-#### Description
-{**When you're done, you can delete the content in this README and update the file with details for others getting started with your repository**}
+This project is based on [ES2015+](https://es6.ruanyifeng.com/), [react](https://reactjs.org/), [react-router](https://reacttraining.com/react-router/), [typescript](https://www.typescriptlang.org/), [axios](https://github.com/axios/axios), [i18next](https://github.com/i18next/react-i18next) and [element-react](https://github.com/ElemeFE/element-react), all api request is simulated by [Mock.js](https://github.com/nuysoft/Mock). Main dependency versions are as below:
 
-#### Software Architecture
-Software architecture description
+```
+- react@16.13.1
+- react-router-dom@5.2.0
+- typescript@3.7.2
+- mobx@5.15.4
+- axios@0.19.2
+- element-react@1.4.34
+- i18next@19.4.5
+- node-sass@4.14.1
+```
 
-#### Installation
+## Online Demo
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+- [GITHUB](https://github.com/lynx1986/react-element-typescript-admin)
+- [GITEE](https://lynx86.gitee.io/react-element-typescript-admin/)
 
-#### Instructions
+## Getting Started
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+```bash
+# clone the project
+git clone https://github.com/lynx1986/react-element-typescript-admin.git
 
-#### Contribution
+# Enter the project directory
+cd react-element-typescript-admin
 
-1.  Fork the repository
-2.  Create Feat_xxx branch
-3.  Commit your code
-4.  Create Pull Request
+# Install dependencies
+npm install
+# Or yarn
+yarn
 
+# Develop
+npm start
+# Or yarn
+yarn start
 
-#### Gitee Feature
-
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+# Build
+npm run build
+# Or yarn
+yarn build
+```
