@@ -1,7 +1,7 @@
 ## Overview
 react-element-typescript-admin is based on the newest development stack of react and it's a react version for the awesome vue-based admin interfaces [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin).
 
-This project is based on [ES2015+](https://es6.ruanyifeng.com/), [react](https://reactjs.org/), [react-router](https://reacttraining.com/react-router/), [typescript](https://www.typescriptlang.org/), [axios](https://github.com/axios/axios), [i18next](https://github.com/i18next/react-i18next) and [element-react](https://github.com/ElemeFE/element-react), all api request is simulated by [Mock.js](https://github.com/nuysoft/Mock). Main dependency versions are as below:
+This project is based on [react](https://reactjs.org/), [react-router](https://reacttraining.com/react-router/), [typescript](https://www.typescriptlang.org/), [axios](https://github.com/axios/axios), [i18next](https://github.com/i18next/react-i18next) and [element-react](https://github.com/ElemeFE/element-react), all api requests are simulated by [Mock.js](https://github.com/nuysoft/Mock). Main dependency versions are as below:
 
 ```
 - react@16.13.1
@@ -16,7 +16,7 @@ This project is based on [ES2015+](https://es6.ruanyifeng.com/), [react](https:/
 
 ## Online Demo
 
-- [GITHUB](https://github.com/lynx1986/react-element-typescript-admin)
+- [GITHUB](https://lynx1986.github.io/react-element-typescript-admin/)
 - [GITEE](https://lynx86.gitee.io/react-element-typescript-admin/)
 
 ## Getting Started
