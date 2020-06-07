@@ -28,6 +28,8 @@
     "react": "^16.13.1",
     "react-activation": "^0.5.0",
     "react-animated-router": "^0.2.4",
+    "react-contexify": "^4.1.1",
+    "react-contextmenu": "^2.14.0",
     "react-dom": "^16.13.1",
     "react-i18next": "^11.5.0",
     "react-router-dom": "^5.2.0",

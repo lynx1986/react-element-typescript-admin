@@ -3,6 +3,7 @@ export default {
         dashboard: '首页',
         example: '示例',
         table: '表格',
+        tableDetail: '表格详情',
         tree: '树',
         form: '表单',
         nested: '嵌套',
@@ -30,8 +31,13 @@ export default {
                 author: '作者',
                 views: '阅读数',
                 status: '状态',
-                datetime: '时间'
+                datetime: '时间',
+                operation: '操作'
             }
+        },
+        message: {
+            confirmDelete: '确认删除该记录吗？',
+            deleteOK: '删除成功',
         }
     },
     loginView: {
@@ -66,10 +72,12 @@ export default {
     },
     common: {
         language: '语言',
-        btn: {
+        operation: {
             reset: '重置',
             cancel: '取消',
             submit: '提交',
+            edit: '编辑',
+            delete: '删除'
         }
     }
 }

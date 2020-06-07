@@ -122,9 +122,9 @@ class FormDemo extends React.Component<FormDemoProps, FormDemoState> {
             <Input value={detail} type='textarea' onChange={v => this.onFieldChange('detail', v)} />
           </Form.Item>
           <Form.Item>
-            <Button type='primary' onClick={this.handleSubmit}>{t('common.btn.submit')}</Button>
-            <Button>{t('common.btn.cancel')}</Button>
-            <Button type='warning' onClick={this.handleReset}>{t('common.btn.reset')}</Button>
+            <Button type='primary' onClick={this.handleSubmit}>{t('common.operation.submit')}</Button>
+            <Button>{t('common.operation.cancel')}</Button>
+            <Button type='warning' onClick={this.handleReset}>{t('common.operation.reset')}</Button>
           </Form.Item>
         </Form>
         

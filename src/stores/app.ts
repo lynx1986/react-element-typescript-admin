@@ -15,6 +15,8 @@ export interface AppState {
     addView: Function;
     removeView: Function;
     removeAllViews: Function;
+    removeOtherViews: Function;
+    removeViewsAfter: Function;
     initVisitedViews: Function;
     isCached: Function;
 }
@@ -100,9 +102,31 @@ class App extends Base {
     @action
     removeAllViews() {
         runInAction('removeAllView', () => {
-            const affixViews = this.cachedViews.filter(v => v.meta?.affix === true );
+            const affixViews = this.visitedViews.filter(v => v.meta?.affix === true );
             this.cachedViews = affixViews;
             this.visitedViews = affixViews;
+        });
+    }
+
+    @action
+    removeOtherViews(view: RouteItem) {
+        runInAction('removeAllView', () => {
+            const affixViews = this.visitedViews.filter(v => v.meta?.affix === true );
+            affixViews.push(view);
+            this.cachedViews = affixViews;
+            this.visitedViews = affixViews;
+        });
+    }
+
+    @action
+    removeViewsAfter(view: RouteItem) {
+        
+        const index = this.visitedViews.findIndex(v => v.fullPath === view.fullPath);
+        const remainViews = this.visitedViews.filter((v, i) => (i <= index) || (v.meta?.affix === true));
+
+        runInAction('removeViewsAfter', () => {
+            this.cachedViews = remainViews;
+            this.visitedViews = remainViews;
         });
     }
 

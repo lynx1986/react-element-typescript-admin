@@ -4,6 +4,7 @@ export default {
         example: 'Example',
         form: 'Form',
         table: 'Table',
+        tableDetail: 'Table Detail',
         tree: 'Tree',
         nested: 'Nested',
         'lvl1-A': 'lvl1-A',
@@ -30,8 +31,13 @@ export default {
                 author: 'Author',
                 views: 'Views',
                 status: 'Status',
-                datetime: 'Datetime'
+                datetime: 'Datetime',
+                operation: 'Operation'
             }
+        },
+        message: {
+            confirmDelete: 'Confirm to delete the article?',
+            deleteOK: 'Deleted!',
         }
     },
     loginView: {
@@ -66,10 +72,12 @@ export default {
     },
     common: {
         language: 'Language',
-        btn: {
+        operation: {
             reset: 'Reset',
             cancel: 'Cancel',
-            submit: 'Submit'
+            submit: 'Submit',
+            edit: 'edit',
+            delete: 'delete'
         }
     }
 }

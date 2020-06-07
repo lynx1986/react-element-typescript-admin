@@ -17,6 +17,7 @@ import Form from './Form';
 import Nested from './Nested';
 import Dynamic from './Dynamic';
 import RoleOnly from './Dynamic/RoleOnly';
+import Detail from './Table/Detail';
 
 export interface RouteItem {
   path: string;
@@ -26,6 +27,7 @@ export interface RouteItem {
   component?: any;
   hasLayout?: boolean;
   fullPath?: string;
+  realPath?: string;
   meta?: {
     roles?: string[];
     title?: string;
@@ -52,7 +54,10 @@ const staticRoutes: RouteItem[] = [
     children: [
       {
         path: '/table', name: 'table', component: Table,
-        meta: { icon: 'table' }
+        meta: { icon: 'table' },
+      },
+      {
+        path: '/table/:id', name: 'tableDetail', hidden: true, component: Detail
       },
       {
         path: '/tree', name: 'tree', component: Tree,
@@ -155,11 +160,6 @@ function sortRoutes(routes: RouteItem[], roles: string[]): { blankRoutes: RouteI
 }
 
 function filterRouteByRoles(route: RouteItem, roles: string[], basePath=''): RouteItem | null {
-
-  // if (!roles || roles.length === 0) {
-  //   route.fullPath = basePath + route.path;
-  //   return route;
-  // }
 
   if (route.meta && route.meta.roles) {
     if (!route.meta.roles.find(role => roles.indexOf(role) >= 0)) {

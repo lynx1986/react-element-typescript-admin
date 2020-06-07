@@ -3,6 +3,7 @@ import { withTranslation, WithTranslation } from 'react-i18next';
 import { Breadcrumb, Dropdown } from 'element-react';
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
+import * as RouteUtil from '../../../utils/route';
 import Icon from '../../../components/Icon';
 
 import styles from './index.module.scss';
@@ -19,35 +20,6 @@ interface NavBarState {
 }
 
 
-function calcMatchedRoutes(path: string, routes: RouteItem[]): RouteItem[] {
-
-    const matchedRoute = routes.find(route => {
-        const routePath = route.path;
-        if (path === '' && routePath === '') {
-            return true;
-        }
-        else if (routePath !== '' && path.indexOf(routePath) === 0) {
-            return true;
-        }
-        else if (routePath.startsWith('/:') && path.length > 1) {
-            return true;
-        }
-
-        return false;
-    });
-
-    if (!matchedRoute) {
-        return [];
-    } else if (path === matchedRoute.path) {
-        return [matchedRoute];
-    } else if (path.indexOf('/', 1) > 0){
-        path = path.substring(path.indexOf('/', 1));
-        return [matchedRoute].concat(calcMatchedRoutes(path, matchedRoute.children!));
-    } else {
-        return [matchedRoute];
-    }
-}
-
 class NavBar extends React.Component<NavBarProps, NavBarState> {
 
     constructor(props: NavBarProps) {
@@ -61,7 +33,7 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
     render() {
 
         const { history, routes, t } = this.props;
-        const matchedRoutes = calcMatchedRoutes(history.location.pathname, routes);
+        const matchedRoutes = RouteUtil.getMatchedRoutes(history.location.pathname, routes);
 
         // const { folded } = this.state;
 
@@ -93,7 +65,7 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
                 <Dropdown className={styles.dropMenu} onCommand={this.handleCommand} menu={(
                     <Dropdown.Menu>
                         <Dropdown.Item command='home'>{t('navMenu.home')}</Dropdown.Item>
-                        <Dropdown.Item>Github</Dropdown.Item>
+                        <Dropdown.Item command='github'>GITHUB</Dropdown.Item>
                         <Dropdown.Item divided command='logout'>{t('navMenu.logout')}</Dropdown.Item>
                     </Dropdown.Menu>
                 )}>
@@ -114,6 +86,8 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
             }
         } else if (command === 'logout') {
             this.props.onLogout();
+        } else if (command === 'github') {
+            window.location.href='https://github.com/lynx1986/react-element-typescript-admin';
         }
     }
 

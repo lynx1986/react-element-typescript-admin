@@ -1,5 +1,11 @@
 import Mock from 'mockjs';
 
+export const deleteArticle = Mock.mock(/api\/article\/[0-999]/, 'delete', {
+    errno: 0,
+    errmsg: '',
+    data: undefined
+});
+
 export const fetchArticles = Mock.mock(/api\/article/, 'get', {
     errno: 0,
     errmsg: '',
@@ -12,3 +18,5 @@ export const fetchArticles = Mock.mock(/api\/article/, 'get', {
         'datetime': '@datetime'
     }]
 });
+
+

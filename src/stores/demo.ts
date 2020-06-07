@@ -1,13 +1,16 @@
 import { observable, action, runInAction } from 'mobx';
-import { Article } from '../api/types';
+import { Article, ActionPayload } from '../api/types';
 import * as api from '../api';
+import Base from './base';
+import { AxiosRequestConfig } from 'axios';
 
 export interface DemoState {
     fetchArticles: Function;
+    removeArticle: Function;
     articles: Article[];
 }
 
-class Demo {
+class Demo extends Base {
     
     @observable
     articles: Article[] = [];
@@ -24,6 +27,17 @@ class Demo {
                 this.articles = response.data;
             }
         });
+    }
+
+    @action
+    async removeArticle(payload: ActionPayload) {
+
+        const config: AxiosRequestConfig = {
+            method: 'DELETE',
+            url: '/api/article/' + payload.params.id
+        };
+
+        super.request(config, payload);
     }
 }
 
