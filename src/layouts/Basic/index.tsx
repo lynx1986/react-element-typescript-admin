@@ -27,12 +27,14 @@ class BasicLayout extends React.Component<BasicLayoutProps, BasicLayoutState> {
 
   componentDidMount() {
 
-    if (this.props.auth!.token === '') {
-      this.props.history.replace('/login');
+    const { auth, app, history } = this.props;
+
+    if (auth!.token === '') {
+      history.replace('/login');
     } else {
-      this.props.auth!.loginByToken({
+      auth!.loginByToken({
         callback: {
-          fail: () => this.props.history.replace('/login')
+          fail: () => history.replace('/login')
         }
       });
     }

@@ -15,6 +15,7 @@ export interface AppState {
     addView: Function;
     removeView: Function;
     removeAllViews: Function;
+    removeCacheView: Function;
     removeOtherViews: Function;
     removeViewsAfter: Function;
     initVisitedViews: Function;
@@ -68,7 +69,6 @@ class App extends Base {
 
         if (view.meta?.affix === true) return;
 
-        console.log('removeView', view);
         this.removeCacheView(view);
         this.removeVisitedView(view);
     }
@@ -82,7 +82,6 @@ class App extends Base {
                 views.splice(index, 1);
             }
             this.cachedViews = views;
-            console.log(this.visitedViews, this.cachedViews);
         });
     }
 
@@ -112,7 +111,10 @@ class App extends Base {
     removeOtherViews(view: RouteItem) {
         runInAction('removeAllView', () => {
             const affixViews = this.visitedViews.filter(v => v.meta?.affix === true );
-            affixViews.push(view);
+            if (!view.meta?.affix) {
+                affixViews.push(view);
+            }
+            
             this.cachedViews = affixViews;
             this.visitedViews = affixViews;
         });

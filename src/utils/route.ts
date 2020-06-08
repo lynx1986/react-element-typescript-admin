@@ -30,7 +30,6 @@ export const isPathMatched = function (routeFullPath: string, locationPath: stri
 
   const reg = new RegExp('^' + routeFullPath + (hasChildren ? '' : '$'));
   const isMatched = reg.test(locationPath);
-  console.log(routeFullPath, locationPath, isMatched);
 
   return isMatched;
 }

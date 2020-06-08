@@ -23,6 +23,12 @@ export default {
         home: '首页',
         logout: '退出登录'
     },
+    tagView: {
+        close: '关闭',
+        closeAll: '关闭所有',
+        closeOthers: '关闭其他',
+        closeRight: '关闭右侧'
+    },
     tableView: {
         table: {
             header: {

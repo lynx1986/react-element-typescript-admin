@@ -23,6 +23,12 @@ export default {
         home: 'Home',
         logout: 'Logout'
     },
+    tagView: {
+        close: 'Close',
+        closeAll: 'Close All',
+        closeOthers: 'Close Other',
+        closeRight: 'Close Right'
+    },
     tableView: {
         table: {
             header: {
@@ -76,8 +82,8 @@ export default {
             reset: 'Reset',
             cancel: 'Cancel',
             submit: 'Submit',
-            edit: 'edit',
-            delete: 'delete'
+            edit: 'Edit',
+            delete: 'Delete'
         }
     }
 }

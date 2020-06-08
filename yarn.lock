@@ -3028,7 +3028,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.5, classnames@^2.2.6:
+classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.npm.taobao.org/classnames/download/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha1-Q5Nb/90pHzJtrQogUwmzjQD2UM4=
@@ -9191,14 +9191,6 @@ react-contexify@^4.1.1:
   dependencies:
     classnames "^2.2.6"
     prop-types "^15.6.2"
-
-react-contextmenu@^2.14.0:
-  version "2.14.0"
-  resolved "https://registry.npm.taobao.org/react-contextmenu/download/react-contextmenu-2.14.0.tgz#d8966f30614b9b780b928be4c8d92bd740d55cdd"
-  integrity sha1-2JZvMGFLm3gLkovkyNkr10DVXN0=
-  dependencies:
-    classnames "^2.2.5"
-    object-assign "^4.1.0"
 
 react-dev-utils@^10.2.1:
   version "10.2.1"

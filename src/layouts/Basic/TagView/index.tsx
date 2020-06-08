@@ -20,28 +20,6 @@ export interface TagViewProps extends RouteComponentProps, WithTranslation {
     app?: AppState
 }
 
-function findRoute(routes: RouteItem[], pathname: string): RouteItem | undefined {
-
-    if (routes.length === 0) return undefined;
-    
-    const matchedRoutes = routes.filter(r => pathname.startsWith(r.fullPath!));
-    if (matchedRoutes.length === 0) return undefined;
-    let route = matchedRoutes[0] ;
-    matchedRoutes.forEach(r => {
-        if (r.fullPath!.length > route.fullPath!.length) {
-            route = r;
-        }
-    });
-
-    console.log(route.fullPath, pathname, route);
-    if (route.fullPath === pathname) {
-        return route;
-    }
-
-    if (!route.children) return undefined;
-    return findRoute(route.children, pathname);
-}
-
 function filterAffixRoutes(routes: RouteItem[], basePath=''): RouteItem[] {
 
     const affixRoutes: RouteItem[] = [];
@@ -79,16 +57,20 @@ class TagView extends React.Component<TagViewProps> {
         }
         app!.initVisitedViews(initViews);
 
-        this.unlisten = history.listen(location => {
+        this.unlisten = history.listen(location => this.handleLocationChange(location.pathname));
+    }
 
-            const matchedRoutes = RouteUtil.getMatchedRoutes(history.location.pathname, routes);
-            if (matchedRoutes.length > 0) {
-                const matchedRoute = matchedRoutes[matchedRoutes.length - 1];
-                if (matchedRoute.hidden) return;
-                matchedRoute.realPath = history.location.pathname;
-                app?.addView(matchedRoute);
-            }
-        });
+    handleLocationChange = (pathname: string) => {
+
+        const { routes, app } = this.props;
+        const matchedRoutes = RouteUtil.getMatchedRoutes(pathname, routes);
+
+        if (matchedRoutes.length > 0) {
+            const matchedRoute = matchedRoutes[matchedRoutes.length - 1];
+            if (matchedRoute.hidden) return;
+            matchedRoute.realPath = pathname;
+            app?.addView(matchedRoute);
+        }
     }
 
     componentWillUnmount() {
@@ -97,7 +79,9 @@ class TagView extends React.Component<TagViewProps> {
 
     render() {
 
+        const { t } = this.props;
         const views = this.props.app!.visitedViews;
+
         
         return (
             <div className={styles.tagView}>
@@ -110,22 +94,22 @@ class TagView extends React.Component<TagViewProps> {
                 }
 
                 <Menu id='context_menu' className={styles.contextMenu}>
-                    <Item data={{ command: 'refresh' }} onClick={this.handleContextMenu}>
+                    {/* <Item data={{ command: 'refresh' }} onClick={this.handleContextMenu}>
                         刷新
-                    </Item>
+                    </Item> */}
                     <Item
                      data={{ command: 'close' }} onClick={this.handleContextMenu}>
-                        关闭
+                        {t('tagView.close')}
                     </Item>
                     <Separator />
                     <Item data={{ command: 'closeAll' }} onClick={this.handleContextMenu}>
-                        关闭所有
+                        {t('tagView.closeAll')}
                     </Item>
                     <Item data={{ command: 'closeOthers' }} onClick={this.handleContextMenu}>
-                        关闭其它
+                        {t('tagView.closeOthers')}
                     </Item>
                     <Item data={{ command: 'closeRight' }} onClick={this.handleContextMenu}>
-                        关闭右侧
+                        {t('tagView.closeRight')}
                     </Item>
                 </Menu>
             </div>
@@ -136,13 +120,11 @@ class TagView extends React.Component<TagViewProps> {
 
         const { history, t } = this.props;
         const pathname = history.location.pathname;
-
         const isActive = route.fullPath === pathname;
-        console.log('path=' + route.path + ' fullPath=' + route.fullPath);
 
         if (route.meta && route.meta.affix) {
             return (
-                <Tag type={isActive ? 'success' : 'primary' } key={route.path}>
+                <Tag className={styles.tag} type={isActive ? 'success' : 'primary' } key={route.path}>
                     <span onClick={() => this.handleNavTo(route)}>
                         {t('route.' + route.name)}
                     </span>
@@ -180,9 +162,10 @@ class TagView extends React.Component<TagViewProps> {
 
         switch (command) {
 
-        case 'refresh':
-            history.replace(history.location.pathname);
-            break;
+        // case 'refresh':
+        //     app!.removeCacheView(route);
+        //     // history.push(route.realPath || route.fullPath!, { key: Math.random() + 'abc' });
+        //     break;
         case 'close':
             app!.removeView(route); 
             history.replace(app!.visitedViews[app!.visitedViews.length - 1].fullPath!);
