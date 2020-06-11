@@ -9,7 +9,7 @@ import { configLocale } from './lang';
 
 import './mock';
 
-import Router from './routes';
+import Router from './config/routes';
 import * as store from './stores';
 
 configLocale(store.app.lang);

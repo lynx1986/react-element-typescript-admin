@@ -3,12 +3,12 @@ import { withTranslation, WithTranslation } from 'react-i18next';
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { Tag } from 'element-react';
 import { inject, observer } from 'mobx-react';
-import { Menu, Item, Separator, Submenu, MenuProvider } from 'react-contexify';
+import { Menu, Item, Separator, MenuProvider } from 'react-contexify';
 import 'react-contexify/dist/ReactContexify.min.css';
 
 import * as RouteUtil from '../../../utils/route';
-import app, { AppState } from '../../../stores/app';
-import { RouteItem } from '../../../routes';
+import { AppState } from '../../../stores/app';
+import { RouteItem } from '../../../config/routes';
 
 import styles from './index.module.scss';
 import './index.module.scss';
@@ -23,7 +23,7 @@ export interface TagViewProps extends RouteComponentProps, WithTranslation {
 function filterAffixRoutes(routes: RouteItem[], basePath=''): RouteItem[] {
 
     const affixRoutes: RouteItem[] = [];
-    routes.map(route => {
+    routes.forEach(route => {
 
         if (route.meta && route.meta.affix) {
             affixRoutes.push(route);

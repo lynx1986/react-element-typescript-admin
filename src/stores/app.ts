@@ -3,7 +3,7 @@ import { ActionPayload } from '../api/types';
 import Base from './base';
 import * as CookieUtil from '../utils/cookie';
 import { configLocale } from '../lang';
-import { RouteItem } from '../routes';
+import { RouteItem } from '../config/routes';
 
 export interface AppState {
 

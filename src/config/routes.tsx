@@ -5,19 +5,19 @@ import KeepAlive, { AliveScope } from 'react-activation';
 import { reaction } from 'mobx';
 import { inject, observer } from 'mobx-react';
 
-import { BasicLayout } from '../layouts';
-
-import Login from './Login';
-import Dashboard from './Dashboard';
-import { AuthState } from '../stores/auth';
-import { AppState } from '../stores/app';
-import Table from './Table';
-import Tree from './Tree';
-import Form from './Form';
-import Nested from './Nested';
-import Dynamic from './Dynamic';
-import RoleOnly from './Dynamic/RoleOnly';
-import Detail from './Table/Detail';
+import { BasicLayout } from 'layouts';
+import Login from 'routes/Login';
+import Dashboard from 'routes/Dashboard';
+import { AuthState } from 'stores/auth';
+import { AppState } from 'stores/app';
+import Table from 'routes/Table';
+import Tree from 'routes/Tree';
+import Form from 'routes/Form';
+import Nested from 'routes/Nested';
+import Dynamic from 'routes/Dynamic';
+import RoleOnly from 'routes/Dynamic/RoleOnly';
+import Detail from 'routes/Table/Detail';
+import { MessageBox } from 'element-react';
 
 export interface RouteItem {
   path: string;
@@ -183,6 +183,15 @@ function filterRouteByRoles(route: RouteItem, roles: string[], basePath=''): Rou
   return filteredRoute;
 }
 
+
+const getUserConfirmation = (message: string, callback: Function) => {
+  MessageBox
+    .confirm(message, '离开', { type: 'warning' })
+    .then(() => callback(true))
+    .catch(() => callback(false))
+}
+
+
 @inject('app', 'auth')
 @observer
 class AppRoute extends React.Component<AppRouteProps, AppRouteState> {
@@ -207,7 +216,7 @@ class AppRoute extends React.Component<AppRouteProps, AppRouteState> {
     console.log(basicRoutes, blankRoutes);
 
     return (
-      <BrowserRouter>
+      <BrowserRouter getUserConfirmation={getUserConfirmation}>
         <AliveScope>
           <Switch>
             {

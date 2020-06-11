@@ -5,7 +5,7 @@ import SideMenu from './SideMenu';
 import NavBar from './NavBar';
 
 import styles from './index.module.scss';
-import { RouteItem } from '../../routes';
+import { RouteItem } from '../../config/routes';
 import { AuthState } from '../../stores/auth';
 import { AppState } from '../../stores/app';
 import TagView from './TagView';
@@ -27,7 +27,7 @@ class BasicLayout extends React.Component<BasicLayoutProps, BasicLayoutState> {
 
   componentDidMount() {
 
-    const { auth, app, history } = this.props;
+    const { auth, history } = this.props;
 
     if (auth!.token === '') {
       history.replace('/login');

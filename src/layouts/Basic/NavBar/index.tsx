@@ -7,7 +7,7 @@ import * as RouteUtil from '../../../utils/route';
 import Icon from '../../../components/Icon';
 
 import styles from './index.module.scss';
-import { RouteItem } from '../../../routes';
+import { RouteItem } from '../../../config/routes';
 
 interface NavBarProps extends RouteComponentProps, WithTranslation {
     routes: RouteItem[];

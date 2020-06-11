@@ -1,8 +1,8 @@
-import { RouteItem } from "../routes";
+import { RouteItem } from "../config/routes";
 
 export const getMatchedRoutes = function(path: string, routes: RouteItem[]): RouteItem[] {
 
-  const matchedRoute = routes.find(route => isPathMatched(route.fullPath!, path, (route.children != undefined && route.children.length > 0)));
+  const matchedRoute = routes.find(route => isPathMatched(route.fullPath!, path, (route.children !== undefined && route.children.length > 0)));
 
   if (!matchedRoute) {
     return [];

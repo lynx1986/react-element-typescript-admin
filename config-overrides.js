@@ -10,9 +10,10 @@ module.exports = override(
 
     addDecoratorsLegacy(),
 
-    disableEsLint(),
+    // disableEsLint(),
 
-    addWebpackAlias({
-        '@': path.resolve(__dirname, 'src')
-    })
+    // Doesn't work properly 
+    // addWebpackAlias({
+    //     '@': path.resolve(__dirname, './src/')
+    // })
 );

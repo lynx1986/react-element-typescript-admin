@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu } from 'element-react';
 import { withTranslation, WithTranslation } from 'react-i18next';
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import { RouteItem } from '../../../routes';
+import { RouteItem } from '../../../config/routes';
 import Icon from '../../../components/Icon';
 
 import styles from './index.module.scss';

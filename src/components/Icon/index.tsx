@@ -24,9 +24,7 @@ export default class Icon extends React.Component<IconProps> {
 
         return (
             <span className={styles.icon}>
-                <i className={family + ' ' + 'icon-' + name} style={style}>
-                    
-                </i>
+                <i className={family + ' icon-' + name} style={style} />
                 { children ?  <span>{children}</span> : null }
             </span>
         )
