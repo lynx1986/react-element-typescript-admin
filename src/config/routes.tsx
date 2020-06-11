@@ -216,7 +216,7 @@ class AppRoute extends React.Component<AppRouteProps, AppRouteState> {
     console.log(basicRoutes, blankRoutes);
 
     return (
-      <BrowserRouter getUserConfirmation={getUserConfirmation}>
+      <BrowserRouter getUserConfirmation={getUserConfirmation} basename="react-element-typescript-admin">
         <AliveScope>
           <Switch>
             {
