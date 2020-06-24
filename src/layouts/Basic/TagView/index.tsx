@@ -8,11 +8,11 @@ import 'react-contexify/dist/ReactContexify.min.css';
 
 import * as RouteUtil from '../../../utils/route';
 import { AppState } from '../../../stores/app';
-import { RouteItem } from '../../../config/routes';
 
 import styles from './index.module.scss';
 import './index.module.scss';
 import { UnregisterCallback } from 'history';
+import { RouteItem } from 'api/types';
 
 
 export interface TagViewProps extends RouteComponentProps, WithTranslation {

@@ -7,7 +7,7 @@ import * as RouteUtil from '../../../utils/route';
 import Icon from '../../../components/Icon';
 
 import styles from './index.module.scss';
-import { RouteItem } from '../../../config/routes';
+import { RouteItem } from 'api/types';
 
 interface NavBarProps extends RouteComponentProps, WithTranslation {
     routes: RouteItem[];
@@ -70,7 +70,7 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
                     </Dropdown.Menu>
                 )}>
                     <span className={styles.avatar}>
-                        <img src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80" />
+                        <img alt='' src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80" />
                         <Icon size={8} name='caret-down' />
                     </span>
                 </Dropdown>

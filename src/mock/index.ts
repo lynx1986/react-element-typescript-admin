@@ -1,10 +1,12 @@
 
 import * as ArticleApis from './article';
 import * as AuthApis from './auth';
+import * as AuthorApis from './author';
 
 export default {
     ...ArticleApis,
-    ...AuthApis
+    ...AuthApis,
+    ...AuthorApis
 };
 
 export const getQueryValue = function(url: string, key: string): string | null {

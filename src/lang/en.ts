@@ -17,7 +17,12 @@ export default {
         dynamic: 'DynamicRoute',
         dynamicIndex: 'DynamicRoute',
         adminOnly: 'AdminOnly',
-        roleAOnly: 'RoleAOnly'
+        roleAOnly: 'RoleAOnly',
+        manage: 'Management',
+        routes: 'Routes',
+        crudDemo: 'CRUD Demo',
+        crudA: 'CRUD DemoA',
+        crudB: 'CRUD DemoB'
     },
     navMenu: {
         home: 'Home',

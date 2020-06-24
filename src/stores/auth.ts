@@ -2,11 +2,12 @@ import { observable, action, runInAction } from 'mobx';
 import { AxiosRequestConfig } from 'axios';
 import Base from './base';
 import * as CookieUtil from '../utils/cookie';
-import { ActionPayload, User } from '../api/types';
+import { ActionPayload, User, RouteItem } from '../api/types';
 
 export interface AuthState {
   user: User | null;
   roles: string[];
+  routes: RouteItem[];
   token: string;
   login: Function;
   loginByToken: Function;
@@ -18,6 +19,7 @@ class Auth extends Base {
   @observable roles = [];
   @observable token = CookieUtil.getAttr(CookieUtil.KEYS.token) || '';
   @observable user = null;
+  @observable routes = [];
 
   @action
   async login(payload: ActionPayload) {
@@ -55,6 +57,7 @@ class Auth extends Base {
     }
   }
 
+
   @action
   async fetchUserInfo(token: string) {
 
@@ -65,6 +68,7 @@ class Auth extends Base {
     const response = await super.request(config);
     if(response.code === 200) {
       runInAction('fetchUserInfo', () => {
+        this.routes = response.data.routes;
         this.roles = response.data.roles;
         this.user = response.data.user;
       });
@@ -76,6 +80,7 @@ class Auth extends Base {
     runInAction('Logout', () => {
       this.token = '';
       this.roles = [];
+      this.routes = [];
       this.user = null;
     });
   }

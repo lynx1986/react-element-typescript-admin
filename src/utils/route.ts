@@ -1,4 +1,4 @@
-import { RouteItem } from "../config/routes";
+import { RouteItem } from "api/types";
 
 export const getMatchedRoutes = function(path: string, routes: RouteItem[]): RouteItem[] {
 

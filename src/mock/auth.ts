@@ -42,14 +42,62 @@ export const loginByToken = Mock.mock('/api/login?method=token', 'post', (option
     };
 });
 
+
+const commonRoute = {
+    path: '/dynamic', name: 'dynamic', hasLayout: true,
+    meta: { icon: 'box-plot' },
+    children: [
+        {
+        path: '', name: 'dynamicIndex', component: 'Dynamic',
+        meta: { icon: 'box-plot' }
+        },
+        {
+        path: '/adminOnly', name: 'adminOnly', component: 'RoleOnly',
+        meta: { roles: ['admin'], icon: 'user' }
+        },
+        {
+        path: '/roleAOnly', name: 'roleAOnly', component: 'RoleOnly',
+        meta: { roles: ['roleA'], icon: 'user' }
+        }
+    ]
+}
+
 export const fetchUserInfo = Mock.mock(/api\/userInfo\?/, 'get', (options: any) => {
 
     const name = getQueryValue(options.url, 'token');
     const roles = [];
+    const routes = [];
+
     if (name === 'admin') {
         roles.push('admin');
+        routes.push(commonRoute);
+        routes.push({ 
+            id: 1, path: '/manage', name: 'manage', hasLayout: true,
+            meta: { icon: 'control' },
+            children: [
+                {
+                    path: '/routes', name: 'routes', component: 'ManageRoutes',
+                    meta: { icon: 'apartment' }
+                }
+            ] 
+        });
     } else {
         roles.push('roleA');
+        routes.push(commonRoute);
+        routes.push({ 
+            id: 1, path: '/cruddemo', name: 'crudDemo', hasLayout: true,
+            meta: { icon: 'profile' },
+            children: [
+                {
+                    path: '/crudA', name: 'crudA', component: 'CrudDemoA', routeId: '0001',
+                    meta: { icon: 'bars' }
+                },
+                {
+                    path: '/crudB', name: 'crudB', component: 'Crud', routeId: '0002',
+                    meta: { icon: 'bars' }
+                },
+            ] 
+        });
     }
 
     return {
@@ -60,7 +108,8 @@ export const fetchUserInfo = Mock.mock(/api\/userInfo\?/, 'get', (options: any) 
                 id: Random.id(),
                 name: Random.name()
             },
-            roles: roles
+            roles,
+            routes
         }
     }
 });

@@ -2,50 +2,24 @@ import React from 'react';
 import { Route,  BrowserRouter, Switch, Redirect } from 'react-router-dom';
 import AnimatedRouter from 'react-animated-router';
 import KeepAlive, { AliveScope } from 'react-activation';
-import { reaction } from 'mobx';
+import { autorun } from 'mobx';
 import { inject, observer } from 'mobx-react';
 
 import { BasicLayout } from 'layouts';
-import Login from 'routes/Login';
-import Dashboard from 'routes/Dashboard';
 import { AuthState } from 'stores/auth';
 import { AppState } from 'stores/app';
-import Table from 'routes/Table';
-import Tree from 'routes/Tree';
-import Form from 'routes/Form';
-import Nested from 'routes/Nested';
-import Dynamic from 'routes/Dynamic';
-import RoleOnly from 'routes/Dynamic/RoleOnly';
-import Detail from 'routes/Table/Detail';
 import { MessageBox } from 'element-react';
+import Routes from 'routes';
+import { RouteItem } from 'api/types';
 
-export interface RouteItem {
-  path: string;
-  name?: string;
-  redirect?: string;
-  hidden?: boolean;
-  component?: any;
-  hasLayout?: boolean;
-  fullPath?: string;
-  realPath?: string;
-  meta?: {
-    roles?: string[];
-    title?: string;
-    icon?: string;
-    cached?: boolean;
-    breadcrumb?: boolean;
-    affix?: boolean;
-  };
-  children?: RouteItem[];
-}
 
 
 const staticRoutes: RouteItem[] = [
   { 
-    path: '/login',  name: 'login', component: Login 
+    path: '/login',  name: 'login', component: 'Login' 
   },
   {
-    path: '/dashboard', name: 'dashboard', hasLayout: true, component: Dashboard,
+    path: '/dashboard', name: 'dashboard', hasLayout: true, component: 'Dashboard',
     meta: { icon: 'dashboard', affix: true }
   },
   {
@@ -53,20 +27,20 @@ const staticRoutes: RouteItem[] = [
     meta: { icon: 'codepen' },
     children: [
       {
-        path: '/table', name: 'table', component: Table,
+        path: '/table', name: 'table', component: 'Table',
         meta: { icon: 'table' },
       },
       {
-        path: '/table/:id', name: 'tableDetail', hidden: true, component: Detail
+        path: '/table/:id', name: 'tableDetail', hidden: true, component: 'Detail'
       },
       {
-        path: '/tree', name: 'tree', component: Tree,
+        path: '/tree', name: 'tree', component: 'Tree',
         meta: { icon: 'pic-right' },
       }
     ]
   },
   {
-    path: '/form', name: 'form', hasLayout: true, component: Form,
+    path: '/form', name: 'form', hasLayout: true, component: 'Form',
     meta: { icon: 'form', cached: true },
     
   },
@@ -75,7 +49,7 @@ const staticRoutes: RouteItem[] = [
     meta: { icon: 'double-right' },
     children: [
       {
-        path: '/lvl1-A', name: 'lvl1-A', component: Nested,
+        path: '/lvl1-A', name: 'lvl1-A', component: 'Nested',
         meta: { icon: 'double-right' },
       },
       {
@@ -83,11 +57,11 @@ const staticRoutes: RouteItem[] = [
         meta: { icon: 'double-right' },
         children: [
           {
-            path: '/lvl2-A', name: 'lvl2-A',component: Nested,
+            path: '/lvl2-A', name: 'lvl2-A',component: 'Nested',
             meta: { icon: 'double-right' },
           },
           {
-            path: '/lvl2-B', name: 'lvl2-B', component: Nested,
+            path: '/lvl2-B', name: 'lvl2-B', component: 'Nested',
             meta: { icon: 'double-right' }
           },
           {
@@ -95,11 +69,11 @@ const staticRoutes: RouteItem[] = [
             meta: { icon: 'double-right' },
             children: [
               { 
-                path: '/lvl3-A', name: 'lvl3-A', component: Nested,
+                path: '/lvl3-A', name: 'lvl3-A', component: 'Nested',
                 meta: { icon: 'double-right' }
               },
               { 
-                path: '/lvl3-B', name: 'lvl3-B', component: Nested,
+                path: '/lvl3-B', name: 'lvl3-B', component: 'Nested',
                 meta: { icon: 'double-right' }
               }
             ]
@@ -110,27 +84,6 @@ const staticRoutes: RouteItem[] = [
   }
 ];
 
-
-const dynamicRoutes: RouteItem[] = [
-  {
-    path: '/dynamic', name: 'dynamic', hasLayout: true,
-    meta: { icon: 'box-plot' },
-    children: [
-      {
-        path: '', name: 'dynamicIndex', component: Dynamic,
-        meta: { icon: 'box-plot' }
-      },
-      {
-        path: '/adminOnly', name: 'adminOnly', component: RoleOnly,
-        meta: { roles: ['admin'], icon: 'user' }
-      },
-      {
-        path: '/roleAOnly', name: 'roleAOnly', component: RoleOnly,
-        meta: { roles: ['roleA'], icon: 'user' }
-      }
-    ]
-  }
-];
 
 interface AppRouteProps {
   auth?: AuthState,
@@ -203,24 +156,24 @@ class AppRoute extends React.Component<AppRouteProps, AppRouteState> {
   }
 
   componentDidMount() {
-    reaction(
-      () => this.props.auth!.roles.map(role => role), 
-      (roles) => {
-        this.setState(sortRoutes(staticRoutes.concat(dynamicRoutes), roles));
+    autorun(() => {
+      const newRoutes = this.props.auth!.routes.map(route => route);
+      const newRoles = this.props.auth!.roles.map(role => role);
+      this.setState(sortRoutes(staticRoutes.concat(newRoutes), newRoles));
     });
   }
 
   render() {
 
     const { blankRoutes, basicRoutes } = this.state;
-    console.log(basicRoutes, blankRoutes);
+    // console.log(basicRoutes, blankRoutes);
 
     return (
       <BrowserRouter getUserConfirmation={getUserConfirmation} basename="react-element-typescript-admin">
         <AliveScope>
           <Switch>
             {
-              blankRoutes.map(route => <Route exact key={route.path} path={route.path} component={route.component} />)
+              blankRoutes.map(route => <Route exact key={route.path} path={route.path} component={Routes[route.component!]} />)
             }
             {
               <BasicLayout routes={basicRoutes}>
@@ -241,11 +194,12 @@ class AppRoute extends React.Component<AppRouteProps, AppRouteState> {
     let routeNodes: JSX.Element[] = [];
     routes.forEach(route => {
       if (route.component) {
+        const RouteComponent = Routes[route.component];
         routeNodes.push(
           <Route exact key={basePath + route.path} path={basePath +route.path} render={
             props => (
               <KeepAlive when={this.props.app!.isCached(route)}>
-                <route.component {...props} />
+                <RouteComponent {...props} />
               </KeepAlive>
             )
           } />

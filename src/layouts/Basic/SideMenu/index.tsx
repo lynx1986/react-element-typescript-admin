@@ -2,11 +2,11 @@ import React from 'react';
 import { Menu } from 'element-react';
 import { withTranslation, WithTranslation } from 'react-i18next';
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import { RouteItem } from '../../../config/routes';
 import Icon from '../../../components/Icon';
 
 import styles from './index.module.scss';
 import './index.module.scss';
+import { RouteItem } from 'api/types';
 
 export interface MenuProps extends RouteComponentProps, WithTranslation {
   routes: RouteItem[];

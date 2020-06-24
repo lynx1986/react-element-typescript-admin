@@ -17,7 +17,12 @@ export default {
         dynamic: '动态',
         dynamicIndex: '动态菜单项',
         adminOnly: '仅管理员可见',
-        roleAOnly: '仅角色A可见'
+        roleAOnly: '仅角色A可见',
+        manage: '管理',
+        routes: '页面',
+        crudDemo: 'CRUD示例',
+        crudA: 'CRUD示例A',
+        crudB: 'CRUD示例B'
     },
     navMenu: {
         home: '首页',

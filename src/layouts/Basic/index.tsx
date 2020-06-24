@@ -5,10 +5,10 @@ import SideMenu from './SideMenu';
 import NavBar from './NavBar';
 
 import styles from './index.module.scss';
-import { RouteItem } from '../../config/routes';
 import { AuthState } from '../../stores/auth';
 import { AppState } from '../../stores/app';
 import TagView from './TagView';
+import { RouteItem } from 'api/types';
 
 export interface BasicLayoutProps extends RouteComponentProps {
   routes: RouteItem[];
