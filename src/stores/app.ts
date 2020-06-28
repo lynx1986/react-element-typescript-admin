@@ -1,6 +1,6 @@
 import { observable, action, runInAction } from 'mobx';
 import { ActionPayload, RouteItem } from '../api/types';
-import Base from './base';
+import Base, { execCallback } from './base';
 import * as CookieUtil from '../utils/cookie';
 import { configLocale } from '../lang';
 
@@ -36,7 +36,7 @@ class App extends Base {
             this.updateLang(params.value);
         }
 
-        super.execCallback(payload);
+        execCallback(payload);
     }
 
     @action

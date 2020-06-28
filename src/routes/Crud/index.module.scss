@@ -7,3 +7,22 @@
 .loading>div:first-of-type {
     opacity: 0.5;
 }
+
+.pagination {
+    padding-top: 12px;
+    float: right;
+}
+
+.toolbar {
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
+}
+
+.toolRemoveSelected {
+    flex: 1;
+}
+
+.toolButtons {
+    flex: 0;
+}

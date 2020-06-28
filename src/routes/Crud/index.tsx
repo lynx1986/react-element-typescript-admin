@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, MessageBox, Message, Dialog, Form, Input, Button, Loading } from 'element-react';
+import { Table, MessageBox, Message, Dialog, Form, Input, Button, Loading, Pagination } from 'element-react';
 
 import styles from './index.module.scss';
 import { CrudField } from 'api/types';
@@ -27,6 +27,9 @@ interface TableColumn {
 interface CrudOptions {
     store: any;
     dataSource ?: string;
+    dataPage ?: string;
+    removeSelected ?: boolean;
+    createEnabled ?: boolean;
     operations ?: Array<string>;
     fields ?: Array<CrudField>;
     fetchFunc ?: string;
@@ -39,6 +42,9 @@ interface CrudOptions {
 const CRUD_INIT_OPTIONS = {
     store: '',
     dataSource: 'items',
+    dataPage: 'pagination',
+    removeSelected: true,
+    createEnabled: true,
     fields: [],
     operations: ['edit', 'remove'],
     fetchFunc: 'fetch',
@@ -63,6 +69,8 @@ interface CrudState {
     fetching: boolean;
     removing: boolean;
     item: any | null;
+    isNew: boolean;
+    selections: Array<any>
 }
 
 class Crud<T, E> extends React.Component<T, CrudState> {
@@ -75,8 +83,13 @@ class Crud<T, E> extends React.Component<T, CrudState> {
 
     calcColumn(fields: CrudField[]) {
 
-        console.log('calcColumn', fields);
         const columns: TableColumn[] = [];
+
+        const{ operations, removeSelected } = this.options;
+
+        if (removeSelected) {
+            columns.push({ type: 'selection' });
+        }
 
         fields.forEach(field => {
             if (field.listVisible) {
@@ -87,8 +100,7 @@ class Crud<T, E> extends React.Component<T, CrudState> {
                 });
             }
         });
-
-        const{ operations } = this.options;
+        
         if (operations && operations.length > 0) {
             columns!.push({
                 label: '操作', width: 160,
@@ -110,7 +122,9 @@ class Crud<T, E> extends React.Component<T, CrudState> {
             editing: false,
             fetching: false,
             removing: false,
-            item: null
+            item: null,
+            isNew: false,
+            selections: []
         }
     }
 
@@ -120,23 +134,50 @@ class Crud<T, E> extends React.Component<T, CrudState> {
 
     render() {
 
-        const { editing, item, fetching } = this.state;
-        const { store, dataSource, fields } = this.options;
+        const { editing, item, fetching, selections } = this.state;
+        const { store, dataSource, dataPage, fields, createEnabled, removeSelected } = this.options;
         const data = store[dataSource!];
+        const page = store[dataPage!];
 
         return (
             <div>
+                <div className={styles.toolbar}>
+                    {
+                        removeSelected ?
+                            <div className={styles.toolRemoveSelected}>
+                                <Button type='danger' disabled={selections.length === 0} >删除选中</Button>
+                            </div> :
+                            <span className={styles.toolRemoveSelected}/>
+                    }
+                    {
+                        createEnabled ?
+                            <div className={styles.toolButtons}>
+                                <Button type='primary' onClick={this.handleCreate}>创建</Button> 
+                            </div> :
+                            <span />
+                    }
+                </div>
                 <Loading className={fetching ? styles.loading : ''} loading={fetching } text='载入中，请稍候'>
-                {
-                    fields!.length === 0 ?
-                        <BlankGrid /> :
-                        <Table
-                            style={{width: '100%'}}
-                            columns={this.calcColumn(fields!)}
-                            height={600}
-                            data={data}
-                        />
-                }
+                    {
+                        fields!.length === 0 ?
+                            <BlankGrid /> :
+                            <div>
+                                <Table
+                                    style={{width: '100%', maxHeight: 600, overflowY: 'scroll'}}
+                                    columns={this.calcColumn(fields!)}
+                                    data={data}
+                                    onSelectChange={(selection) => this.handleSelect(selection)}
+                                />
+                                <div className={styles.pagination}>
+                                    <Pagination 
+                                        layout='total, sizes, prev, pager, next' total={page.total} 
+                                        pageSizes={[10, 20, 30, 40, 50]} pageSize={page.size} currentPage={page.current}
+                                        onCurrentChange={value => this.handlePageChange('current', value!)}
+                                        onSizeChange={value => this.handlePageChange('size', value!)}
+                                    />
+                                </div>
+                            </div>
+                    }
                 </Loading>
                 <Dialog title='编辑' visible={editing} onCancel={() => this.setState({ editing: false })}>
                     <Dialog.Body>
@@ -155,12 +196,13 @@ class Crud<T, E> extends React.Component<T, CrudState> {
     renderEditForm(data: E) {
 
         const { fields } = this.options;
+        const { item, isNew } = this.state;
 
         return (
-            <Form model={this.state.item}>
+            <Form model={item}>
                 {
                     fields!.map(field => {
-                        if (field.updateVisible) {
+                        if ((isNew && field.createVisible) || (!isNew && field.updateVisible)) {
                             return (
                                 <Form.Item key={field.id} label={field.prop} prop={field.prop}>
                                     <Input value={data[field.prop!]} />
@@ -203,27 +245,41 @@ class Crud<T, E> extends React.Component<T, CrudState> {
         });
     }
 
+    handlePageChange = (name: string, value: number) => {
+        this.options.store.updatePage(name, value);
+        this.fetchItems();
+    }
+
     handleEditSubmit = () => {
 
-        const { item } = this.state;
+        const { item, isNew } = this.state;
         this.setState({ editing: false, item: null });
 
-        const { store, updateFunc } = this.options;
-        store[updateFunc!]({
+        const { store, updateFunc, createFunc } = this.options;
+        const submitFunc = isNew ? store[createFunc!] : store[updateFunc!];
+        submitFunc({
             params: { item },
             callback: {
                 success: () => {
                     Message({
-                        message: '编程提交成功', type: 'success', duration: 600,
+                        message: '提交成功', type: 'success', duration: 600,
                         onClose: () => this.fetchItems()
                     });
                 }
             }
-        })
+        });
+    }
+
+    handleSelect = (selections: E[]) => {
+        this.setState({ selections });
+    }
+
+    handleCreate = () => {
+        this.setState({ editing: true, item: {}, isNew: true });
     }
 
     handleEdit = (data: E) => {
-        this.setState({ editing: true, item: data })
+        this.setState({ editing: true, item: data, isNew: false })
     }
 
     handleRemove = (data: E) => {

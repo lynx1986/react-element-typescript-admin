@@ -43,6 +43,12 @@ export interface User {
     name: string;
 }
 
+export interface CrudPage {
+    total: number;
+    size: number;
+    current: number;
+}
+
 export interface CrudField {
     id: string;
     prop: string;
