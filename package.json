@@ -17,7 +17,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-transition-group": "^4.4.0",
     "animate.css": "^4.1.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "element-react": "^1.4.34",
     "element-theme-default": "^1.4.13",
     "history": "^4.10.1",
