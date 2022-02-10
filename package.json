@@ -26,7 +26,7 @@
     "mobx": "^5.15.4",
     "mobx-react": "^6.2.2",
     "mockjs": "^1.1.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "qs": "^6.9.4",
     "react": "^16.13.1",
     "react-activation": "^0.5.0",
